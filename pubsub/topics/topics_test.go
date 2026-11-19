@@ -352,6 +352,16 @@ func TestPublishWithCompression(t *testing.T) {
 	}
 }
 
+func TestPublishWithHedgingSettings(t *testing.T) {
+	ctx := context.Background()
+	tc := testutil.SystemTest(t)
+	client := setup(t)
+	createTopic(ctx, client, topicName)
+	if err := publishWithHedgingSettings(io.Discard, tc.ProjectID, topicID); err != nil {
+		t.Errorf("failed to publish message: %v", err)
+	}
+}
+
 func TestCreateTopicWithSMT(t *testing.T) {
 	setup(t)
 	tc := testutil.SystemTest(t)
